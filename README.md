@@ -10,9 +10,129 @@ These files have been tested and used to generate a live ELK deployment on Azure
 
 Below are a list of the yml file playbooks
   - My First Playbook
+````````   
+GNU nano 2.9.3                                     my-playbook.yaml                                               
+---
+  -name: My first playbook
+   hosts: webservers
+   become: true
+   tasks:
+
+   -name: Install apache httpd (state=present is optional)
+    apt:
+      name: apache2
+      state: present
+````````
   - Install ELK
+``
+  GNU nano 2.9.3                                     install-elk.yml               
+``
+ ```
+  - name: Config Web VM with Docker
+    hosts: elk
+    become: true
+    tasks:
+
+    - name: set vm.max_map_count to 262144 in sysctl
+      sysctl: name={{ item.key }} value={{ item.value }}
+      with_items:
+        - { key: "vm.max_map_count", value: "262144" }
+
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        name: docker.io
+        state: present
+
+    - name: Install pip3
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    - name: Install Python Docker Module
+      pip:
+        name: docker
+        state: present
+
+    - name: Download and Launch the sebp elk 761 Docker
+      docker_container:
+        name: sebp
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+         - 5601:5601
+         - 9200:9200
+         - 5044:5044
+         
+    - name: Enable Docker Service
+      systemd:
+        name: docker
+        enabled: yes
+```
   - Filebeat
+```
+ GNU nano 2.9.3                                  filebeat-playbook.yml                                             
+---
+ - name: installing and launching filebeat
+   hosts: webservers
+   become: yes
+   tasks:
+   - name: download filebeat deb
+     command: curl -L -O https://artifacts.elastic.co/downloads/beats/filebeat/filebeat-7.6.1-amd64.deb
+   - name: install filebeat deb
+     command: dpkg -i filebeat-7.6.1-amd64.deb
+   - name: drop in filebeat.yml
+     copy:
+       src: /etc/ansible/files/filebeat-config.yml
+       dest: /etc/filebeat/filebeat.yml
+       mode: 0644
+   - name: enable and configure system module
+     command: filebeat modules enable system
+   - name: setup filebeat
+     command: filebeat setup
+   - name: start filebeat service
+     command: service filebeat start
+   - name: enable service filebeat on boot
+     systemd:
+       name: filebeat
+       enabled: yes
+  ```
   - Metricbeat
+  ```
+   GNU nano 2.9.3                                 metricbeat-playbook.yml                                            
+---
+ - name: installing and launching Metricbeat
+   hosts: webservers
+   become: yes
+   tasks:
+
+   - name: download metricbeat deb
+     command: curl -L -O curl -L -O https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-7.6.1-amd64.$
+   - name: install metricbeat deb
+     command: dpkg -i metricbeat-7.6.1-amd64.deb
+
+   - name: drop in metricbeat.yml
+     copy:
+       src: /etc/ansible/files/metricbeat-config.yml
+       dest: /etc/metricbeat/metricbeat.yml
+       mode: 0644
+
+   - name: enable and configure system module
+     command: metricbeat modules enable system
+
+   - name: setup metricbeat
+     command: metricbeat setup
+
+   - name: start metricbeat service
+     command: service metricbeat start
+
+   - name: enable service metricbeat on boot
+     systemd:
+       name: metricbeat
+       enabled: yes
+   ```
 
 This document contains the following details:
 - Description of the Topology
