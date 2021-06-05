@@ -1,0 +1,44 @@
+  GNU nano 2.9.3                                     install-elk.yml                                                
+---
+  - name: Config Web VM with Docker
+    hosts: elk
+    become: true
+    tasks:
+
+    - name: set vm.max_map_count to 262144 in sysctl
+      sysctl: name={{ item.key }} value={{ item.value }}
+      with_items:
+        - { key: "vm.max_map_count", value: "262144" }
+
+    - name: Install docker.io
+      apt:
+        update_cache: yes
+        name: docker.io
+        state: present
+
+    - name: Install pip3
+      apt:
+        force_apt_get: yes
+        name: python3-pip
+        state: present
+
+    - name: Install Python Docker Module
+      pip:
+        name: docker
+        state: present
+
+    - name: Download and Launch the sebp elk 761 Docker
+      docker_container:
+        name: sebp
+        image: sebp/elk:761
+        state: started
+        restart_policy: always
+        published_ports:
+         - 5601:5601
+         - 9200:9200
+         - 5044:5044
+         
+    - name: Enable Docker Service
+      systemd:
+        name: docker
+        enabled: yes
