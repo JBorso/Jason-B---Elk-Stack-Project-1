@@ -24,10 +24,9 @@ GNU nano 2.9.3                                     my-playbook.yaml
       state: present
 ````````
   - Install ELK
-``
-  GNU nano 2.9.3                                     install-elk.yml               
-``
- ```
+````````
+GNU nano 2.9.3                                     install-elk.yml               
+---
   - name: Config Web VM with Docker
     hosts: elk
     become: true
@@ -70,10 +69,10 @@ GNU nano 2.9.3                                     my-playbook.yaml
       systemd:
         name: docker
         enabled: yes
-```
+````````
   - Filebeat
-```
- GNU nano 2.9.3                                  filebeat-playbook.yml                                             
+````````
+GNU nano 2.9.3                                  filebeat-playbook.yml                                             
 ---
  - name: installing and launching filebeat
    hosts: webservers
@@ -98,10 +97,10 @@ GNU nano 2.9.3                                     my-playbook.yaml
      systemd:
        name: filebeat
        enabled: yes
-  ```
+````````
   - Metricbeat
-  ```
-   GNU nano 2.9.3                                 metricbeat-playbook.yml                                            
+````````
+GNU nano 2.9.3                                 metricbeat-playbook.yml                                            
 ---
  - name: installing and launching Metricbeat
    hosts: webservers
@@ -132,7 +131,7 @@ GNU nano 2.9.3                                     my-playbook.yaml
      systemd:
        name: metricbeat
        enabled: yes
-   ```
+ ````````
 
 This document contains the following details:
 - Description of the Topology
@@ -201,10 +200,9 @@ The playbook implements the following tasks:
   - Install Download and Launch the sebp elk 761 Docker will install the docker containers for the Elk stack server.
 
 
-``
-  GNU nano 2.9.3                                     install-elk.yml               
-``
- ```
+````````
+GNU nano 2.9.3                                     install-elk.yml               
+---
   - name: Config Web VM with Docker
     hosts: elk
     become: true
@@ -247,7 +245,7 @@ The playbook implements the following tasks:
       systemd:
         name: docker
         enabled: yes
-```
+````````
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
