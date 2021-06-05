@@ -177,4 +177,7 @@ As a **Bonus**, provide the specific commands the user will need to run to downl
   - sudo docker start goofy_cannon
   - sudo docker attach goofy_cannon
 To install a playbook (ansible-playbook (name of playbook).yml
-
+- ansible-playbook pentest.yml
+- ansible-playbook install-elk.yml
+- ansible-playbook filebeat-playbook.yml
+- ansible-playbook metricbeat-playbook.yml
