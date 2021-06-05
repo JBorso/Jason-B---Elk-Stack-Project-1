@@ -131,7 +131,7 @@ The playbook implements the following tasks:
 
 The following screenshot displays the result of running `docker ps` after successfully configuring the ELK instance.
 
-![Image of Docker ps](https://raw.githubusercontent.com/JBorso/Jason-B---Elk-Stack-Project-1/main/Diagrams/dockerps.PNG?token=ASHI4YA3TSCKXW5MZHEVG7LAXPGTU "Docker ps")
+![Image of Docker ps](https://github.com/JBorso/Jason-B---Elk-Stack-Project-1/blob/main/Diagrams/dockerps.PNG "Docker ps")
 
 Target Machines & Beats
 
@@ -160,7 +160,7 @@ SSH into the control node and follow the steps below:
 - Where do you copy it? cp /etc/ansible/filebeat-config.yml to /etc/ansible/files/filebeat-config.yml
 
 - Which file do you update to make Ansible run the playbook on a specific machine? How do I specify which machine to install the ELK server on versus which to install Filebeat on? To update you would want to run filebeat-config.yml. To target a specific machine you would need to navigate to the /etc/ansible/hosts and edit the file to add the new IP address for the new webserver or elk server. 
-![Image of Hosts File](https://raw.githubusercontent.com/JBorso/Jason-B---Elk-Stack-Project-1/main/Diagrams/Hosts_File_Example.PNG?token=ASHI4YDFTCN63KPKMXL7MC3AXPGVO "Hosts File Example")
+![Image of Hosts File](https://github.com/JBorso/Jason-B---Elk-Stack-Project-1/blob/main/Diagrams/Hosts_File_Example.PNG "Hosts File Example")
 
 - Which URL do you navigate to in order to check that the ELK server is running?
 [Kibana Test Link](http://[your.VM.IP]:5601/app/kibana)
