@@ -154,7 +154,7 @@ In order to use the playbook, you will need to have an Ansible control node alre
 SSH into the control node and follow the steps below:
 - Copy the config file to the ansible containers on the webserver VM’s.
 - Update the ansible hosts file to include the correct IP addresses of the webservers and Elk Stack.
-- Run the playbook, and navigate to [Kibana Test Link](http://[your.VM.IP]:5601/app/kibana) to check that the installation worked as expected.
+- Run the playbook, and navigate to [Kibana Test Link](http://[your.VM.IP]:5601/app/kibana "Kibana Test Link") to check that the installation worked as expected.
 
 - Which file is the playbook? filebeat-config.yml
 - Where do you copy it? cp /etc/ansible/filebeat-config.yml to /etc/ansible/files/filebeat-config.yml
